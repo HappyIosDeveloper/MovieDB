@@ -20,7 +20,8 @@ class Test_SearchViewController: XCTestCase {
     func testNavigationBar() {
         let sut = getViewController()
         sut.view.layoutIfNeeded()
-        XCTAssertEqual(sut.navigationController?.title, "search".localized)
+        XCTAssertNotNil(sut.navigationItem.title)
+        XCTAssertEqual(sut.navigationItem.title!, "search".localized)
     }
     
     func testSearchBar() {
