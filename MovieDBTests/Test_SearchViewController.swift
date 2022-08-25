@@ -10,10 +10,10 @@ import XCTest
 
 class Test_SearchViewController: XCTestCase {
     
-    func getViewController()-> UIViewController {
+    func getViewController()-> SearchViewController {
         let bundle = Bundle(for: SearchViewController.self)
         let storyboard = UIStoryboard(name: "Main", bundle: bundle)
-        let vc = storyboard.instantiateViewController(withIdentifier: "SearchViewController")
+        let vc = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
         return vc
     }
     
@@ -21,12 +21,21 @@ class Test_SearchViewController: XCTestCase {
         let sut = getViewController()
         sut.view.layoutIfNeeded()
         XCTAssertNotNil(sut.navigationItem.title)
-        XCTAssertEqual(sut.navigationItem.title!, "search".localized)
+        XCTAssertEqual(sut.navigationItem.title, "search".localized)
     }
     
     func testSearchBar() {
-        // test placeholder
-        // test delegation
+        let sut = getViewController()
+        sut.view.layoutIfNeeded()
+        XCTAssertNotNil(sut.searchBar.placeholder)
+        XCTAssertEqual(sut.searchBar.placeholder, "search_here".localized)
+        XCTAssertNotNil(sut.searchBar.delegate)
+        let vm = SearchViewModel()
+        XCTAssertEqual(vm.searchString, "")
+        vm.searchString = "ab"
+        XCTAssertFalse(vm.isSearchTextValid())
+        vm.searchString = "abc"
+        XCTAssertTrue(vm.isSearchTextValid())
     }
     
     func testCollectionView() {

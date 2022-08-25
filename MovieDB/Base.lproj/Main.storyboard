@@ -16,10 +16,24 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="tBm-kd-iYu">
+                                <rect key="frame" x="16" y="88" width="382" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="tBm-kd-iYu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Nrl-fr-sLR"/>
+                            <constraint firstItem="tBm-kd-iYu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Yiy-eW-Ydb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tBm-kd-iYu" secondAttribute="trailing" constant="16" id="wQM-NM-7NP"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6Hy-yW-1Po"/>
+                    <connections>
+                        <outlet property="searchBar" destination="tBm-kd-iYu" id="qcE-MH-SAL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

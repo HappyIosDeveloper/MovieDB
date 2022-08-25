@@ -6,14 +6,17 @@
 //
 
 import UIKit
+import Combine
 
 class SearchViewController: UIViewController {
-
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     private var viewModel = SearchViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         setupViews()
     }
 }
@@ -21,18 +24,48 @@ class SearchViewController: UIViewController {
 // MARK: - Setup Functions
 extension SearchViewController {
     
-    func setupViews() {
+    private func setupViews() {
         setupNavigationBar()
+        setupSearchBar()
     }
     
-    func setupNavigationBar() {
+    private func setupNavigationBar() {
         navigationItem.title = "search".localized
+    }
+    
+    private func setupSearchBar() {
+        searchBar.delegate = self
+        searchBar.placeholder = "search_here".localized
     }
 }
 
 // MARK: - SearchBar Functions
-extension SearchViewController {
+extension SearchViewController: UISearchBarDelegate {
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        setupSearchBarDirection(searchText: searchText)
+        viewModel.searchString = searchText
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        setupSearchBarDirection(searchText: searchBar.text ?? "")
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        setupSearchBarDirection(searchText: searchBar.text ?? "")
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        viewModel.searchAction()
+    }
+    
+    func setupSearchBarDirection(searchText: String) {
+        if searchBar.text?.isEmpty ?? true {
+            searchBar.semanticContentAttribute = isLanguageRTL ? .forceRightToLeft : .forceLeftToRight
+        } else {
+            searchBar.semanticContentAttribute = searchText.constainsArabic ? .forceRightToLeft : .forceLeftToRight
+        }
+    }
 }
 
 // MARK: - CollectionView Functions

@@ -9,6 +9,8 @@ import Foundation
 
 class SearchViewModel {
     
+    var searchString = ""
+    
     func bind() {
         
     }
@@ -18,15 +20,22 @@ class SearchViewModel {
 extension SearchViewModel {
     
     func isSearchTextValid()-> Bool {
-        return false
+        return searchString.count > 2
     }
     
-    func sarchAction() {
-        
+    func searchAction() {
+        if isSearchTextValid() {
+            searchRequest()
+        } else {
+            
+        }
     }
 }
 
 // MARK: - API Calls
 extension SearchViewModel {
     
+    func searchRequest() {
+        print("Search API call")
+    }
 }
