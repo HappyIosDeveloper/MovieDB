@@ -20,6 +20,11 @@ class SearchViewController: UIViewController {
         
         setupViews()
     }
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+         super.willTransition(to: newCollection, with: coordinator)
+        viewModel.reloadCollectionView?()
+     }
 }
 
 // MARK: - Setup Functions

@@ -11,7 +11,7 @@ class SearchViewModel {
     
     var searchString = ""
     var reloadCollectionView: (()->())?
-    var films = ["a", "b", "c"] {
+    var films = [UIColor.red, .blue, .green, .gray, .white] {
         didSet {
             DispatchQueue.main.async {
                 self.reloadCollectionView?()
@@ -49,17 +49,17 @@ extension SearchViewModel {
     
     func getCell(collectionView: UICollectionView, indexPath: IndexPath)-> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCollectionViewCell", for: indexPath) as! MovieCollectionViewCell
-        cell.backgroundColor = [UIColor.red, .blue, .green, .gray, .white].randomElement()!
+        cell.backgroundColor = films[indexPath.row]
         return cell
     }
     
     func getCellSize()-> CGSize {
         if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight {
-            let width = screenWidth / 3.5
+            let width = UIScreen.main.bounds.width / 3.5
             return CGSize(width: width, height: width / 2)
         } else {
             let width = screenWidth - 40
-            return CGSize(width: screenWidth, height: width / 2)
+            return CGSize(width: width, height: width / 2)
         }
     }
 }

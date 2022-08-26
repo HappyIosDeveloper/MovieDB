@@ -51,7 +51,7 @@ class Test_SearchViewController: XCTestCase {
         } else {
             XCTFail("Delay interrupted")
         }
-        sut.viewModel.films = ["a"]
+        sut.viewModel.films = [.red]
         let exp2 = expectation(description: "WaitForUpdatingCollectionView")
         let result2 = XCTWaiter.wait(for: [exp2], timeout: 0.1)
         if result2 == XCTWaiter.Result.timedOut {
