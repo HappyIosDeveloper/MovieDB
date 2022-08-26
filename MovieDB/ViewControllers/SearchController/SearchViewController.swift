@@ -47,9 +47,17 @@ extension SearchViewController {
     }
     
     private func setupCollectionView() {
+        let space: CGFloat = 16
         collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCollectionViewCell")
         collectionView.delegate = self
         collectionView.dataSource = self
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionHeadersPinToVisibleBounds = true
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = space
+        layout.minimumInteritemSpacing = space
+        collectionView.collectionViewLayout = layout
+        collectionView.contentInset = UIEdgeInsets(top: space, left: space, bottom: space, right: space)
     }
     
     private func bindViewModel() {
