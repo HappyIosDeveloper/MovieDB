@@ -11,8 +11,9 @@ import Combine
 class SearchViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var collectionView: UICollectionView!
     
-    private var viewModel = SearchViewModel()
+    var viewModel = SearchViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,8 @@ extension SearchViewController {
     private func setupViews() {
         setupNavigationBar()
         setupSearchBar()
+        setupCollectionView()
+        bindViewModel()
     }
     
     private func setupNavigationBar() {
@@ -36,6 +39,18 @@ extension SearchViewController {
     private func setupSearchBar() {
         searchBar.delegate = self
         searchBar.placeholder = "search_here".localized
+    }
+    
+    private func setupCollectionView() {
+        collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCollectionViewCell")
+        collectionView.delegate = self
+        collectionView.dataSource = self
+    }
+    
+    private func bindViewModel() {
+        viewModel.bind {
+            self.collectionView.reloadData()
+        }
     }
 }
 
@@ -69,6 +84,17 @@ extension SearchViewController: UISearchBarDelegate {
 }
 
 // MARK: - CollectionView Functions
-extension SearchViewController {
+extension SearchViewController: CollectionViewDelegates {
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.getCellsCount()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return viewModel.getCell(collectionView: collectionView, indexPath: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return viewModel.getCellSize()
+    }
 }

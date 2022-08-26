@@ -21,17 +21,33 @@
                                 <rect key="frame" x="16" y="88" width="382" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zpi-Qt-hZy">
+                                <rect key="frame" x="0.0" y="139" width="414" height="723"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="rfr-Fd-aZ8">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="tBm-kd-iYu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Nrl-fr-sLR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zpi-Qt-hZy" secondAttribute="trailing" id="Nx4-H1-ADE"/>
                             <constraint firstItem="tBm-kd-iYu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Yiy-eW-Ydb"/>
+                            <constraint firstItem="zpi-Qt-hZy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="oSi-iF-D0f"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zpi-Qt-hZy" secondAttribute="bottom" id="rrn-Ve-r3P"/>
+                            <constraint firstItem="zpi-Qt-hZy" firstAttribute="top" secondItem="tBm-kd-iYu" secondAttribute="bottom" id="sYH-nE-dDK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tBm-kd-iYu" secondAttribute="trailing" constant="16" id="wQM-NM-7NP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6Hy-yW-1Po"/>
                     <connections>
+                        <outlet property="collectionView" destination="zpi-Qt-hZy" id="jpB-5a-zui"/>
                         <outlet property="searchBar" destination="tBm-kd-iYu" id="qcE-MH-SAL"/>
                     </connections>
                 </viewController>
