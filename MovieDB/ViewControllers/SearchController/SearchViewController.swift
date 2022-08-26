@@ -52,12 +52,12 @@ extension SearchViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         let layout = UICollectionViewFlowLayout()
-        layout.sectionHeadersPinToVisibleBounds = true
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = space
         layout.minimumInteritemSpacing = space
         collectionView.collectionViewLayout = layout
         collectionView.contentInset = UIEdgeInsets(top: space, left: space, bottom: space, right: space)
+        collectionView.keyboardDismissMode = .onDrag
     }
     
     private func bindViewModel() {
@@ -85,6 +85,7 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         viewModel.searchAction()
+        view.endEditing(true)
     }
     
     func setupSearchBarDirection(searchText: String) {
