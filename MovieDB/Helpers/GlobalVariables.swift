@@ -11,3 +11,8 @@ typealias CollectionViewDelegates = UICollectionViewDelegate & UICollectionViewD
 
 let screenWidth = UIScreen.main.bounds.width
 let screenHeight = UIScreen.main.bounds.height
+var isLanguageRTL: Bool {
+    guard let language = Locale.current.languageCode else { return false }
+    let direction = Locale.characterDirection(forLanguage: language)
+    return direction == .rightToLeft
+}

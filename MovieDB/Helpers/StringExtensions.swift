@@ -21,4 +21,8 @@ extension String {
         let predicate = NSPredicate(format: "SELF MATCHES %@", "(?s).*\\p{Arabic}.*")
         return predicate.evaluate(with: self)
     }
+    
+    func encode()-> String {
+        return addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "?"
+    }
 }

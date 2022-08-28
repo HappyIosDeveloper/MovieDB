@@ -9,9 +9,10 @@ import UIKit
 
 class SearchViewModel {
     
+    var currentPage = 1
     var searchString = ""
     var reloadCollectionView: (()->())?
-    var films = [UIColor.red, .blue, .green, .gray, .white] {
+    var films: [SearchMovieResponseResult] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.reloadCollectionView?()
@@ -49,7 +50,7 @@ extension SearchViewModel {
     
     func getCell(collectionView: UICollectionView, indexPath: IndexPath)-> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCollectionViewCell", for: indexPath) as! MovieCollectionViewCell
-        cell.backgroundColor = films[indexPath.row]
+        cell.setup(with: films[indexPath.row])
         return cell
     }
     
@@ -68,6 +69,24 @@ extension SearchViewModel {
 extension SearchViewModel {
     
     func searchRequest() {
-        print("Search API call")
+        Repository.shared.searchMovie(name: searchString, pageNumber: currentPage) { response in
+            switch response {
+            case .success(let data):
+                if let films = data.results {
+                    self.films = films
+                }
+            case .failure(let error):
+                switch error {
+                case .parsingIssue:
+                    print("parsingIssue")
+                case .wrongResponse:
+                    print("wrongResponse")
+                case .unknown:
+                    print("unknown")
+                case .repositoryIssue:
+                    print("repositoryIssue")
+                }
+            }
+        }
     }
 }
