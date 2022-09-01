@@ -60,9 +60,24 @@ extension SearchViewController {
         collectionView.keyboardDismissMode = .onDrag
     }
     
+    func setupCollectionViewBackground(shouldShowBackground: Bool) {
+        let dimension = screenWidth / 4
+        let backView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: dimension, height: dimension)))
+        backView.image = UIImage(named: "nodata-found")
+        backView.contentMode = .scaleAspectFit
+        collectionView.backgroundView = shouldShowBackground ? backView : nil
+    }
+    
+    private func updateCollectionView() {
+        collectionView.reloadData()
+        setupCollectionViewBackground(shouldShowBackground: viewModel.films.isEmpty)
+    }
+    
     private func bindViewModel() {
         viewModel.bind {
-            self.collectionView.reloadData()
+            DispatchQueue.main.async {
+                self.updateCollectionView()
+            }
         }
     }
 }
