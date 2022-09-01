@@ -16,3 +16,12 @@ var isLanguageRTL: Bool {
     let direction = Locale.characterDirection(forLanguage: language)
     return direction == .rightToLeft
 }
+enum CornerRadius: CGFloat {
+    case none = 0
+    case large = 15
+    case regular = 10
+    case small = 5
+    case round = -1
+    case superLarge = 25
+    case massiveLarge = 60
+}

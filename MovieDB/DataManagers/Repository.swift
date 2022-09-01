@@ -12,6 +12,7 @@ class Repository {
     static let shared = Repository()
     private let apiKey = "33d79fc07f9fe5adde08ea3d05557e55"
     private let baseURL = "https://api.themoviedb.org/3/"
+    let imagesBaseURL = "https://image.tmdb.org/t/p/original/"
     private let repositoryDataDeadlineInSeconds: Double = 300
 
     private init() {}

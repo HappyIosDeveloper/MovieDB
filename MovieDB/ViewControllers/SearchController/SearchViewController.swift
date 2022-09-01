@@ -68,7 +68,7 @@ extension SearchViewController {
         collectionView.backgroundView = shouldShowBackground ? backView : nil
     }
     
-    private func updateCollectionView() {
+    private func reloadCollectionView() {
         collectionView.reloadData()
         setupCollectionViewBackground(shouldShowBackground: viewModel.films.isEmpty)
     }
@@ -76,7 +76,7 @@ extension SearchViewController {
     private func bindViewModel() {
         viewModel.bind {
             DispatchQueue.main.async {
-                self.updateCollectionView()
+                self.reloadCollectionView()
             }
         }
     }
@@ -107,7 +107,7 @@ extension SearchViewController: UISearchBarDelegate {
         if searchBar.text?.isEmpty ?? true {
             searchBar.semanticContentAttribute = isLanguageRTL ? .forceRightToLeft : .forceLeftToRight
         } else {
-            searchBar.semanticContentAttribute = searchText.constainsArabic ? .forceRightToLeft : .forceLeftToRight
+            searchBar.semanticContentAttribute = searchText.containsArabic ? .forceRightToLeft : .forceLeftToRight
         }
     }
 }

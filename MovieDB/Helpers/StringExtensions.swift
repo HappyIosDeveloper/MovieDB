@@ -17,7 +17,7 @@ extension String {
          return Bundle.main.localizedString(forKey: self, value: nil, table: "Localizable")
      }
     
-    var constainsArabic: Bool {
+    var containsArabic: Bool {
         let predicate = NSPredicate(format: "SELF MATCHES %@", "(?s).*\\p{Arabic}.*")
         return predicate.evaluate(with: self)
     }

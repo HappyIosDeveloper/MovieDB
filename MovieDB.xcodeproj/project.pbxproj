@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0BCAFE9A28C0D24F0064645D /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCAFE9928C0D24F0064645D /* UIImageViewExtensions.swift */; };
+		0BCAFE9D28C0D5970064645D /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 0BCAFE9C28C0D5970064645D /* SDWebImage */; };
+		0BCAFE9F28C0D92D0064645D /* UIViewExtesions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCAFE9E28C0D92D0064645D /* UIViewExtesions.swift */; };
 		0BDC7FD728BB24A500C72E47 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDC7FD528BB24A500C72E47 /* WebService.swift */; };
 		0BDC7FD828BB24A500C72E47 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDC7FD628BB24A500C72E47 /* Repository.swift */; };
 		0BDC7FDB28BB2CA400C72E47 /* SearchMovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDC7FDA28BB2CA400C72E47 /* SearchMovieResponse.swift */; };
@@ -48,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0BCAFE9928C0D24F0064645D /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
+		0BCAFE9E28C0D92D0064645D /* UIViewExtesions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtesions.swift; sourceTree = "<group>"; };
 		0BDC7FD528BB24A500C72E47 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		0BDC7FD628BB24A500C72E47 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		0BDC7FDA28BB2CA400C72E47 /* SearchMovieResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieResponse.swift; sourceTree = "<group>"; };
@@ -82,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BCAFE9D28C0D5970064645D /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,9 +186,11 @@
 		3833DF1F28B7F075007333B0 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				3833DF2A28B7F1A3007333B0 /* StringExtensions.swift */,
+				0BCAFE9928C0D24F0064645D /* UIImageViewExtensions.swift */,
 				3833DF3028B7FC9E007333B0 /* UIViewControllerExtensions.swift */,
+				3833DF2A28B7F1A3007333B0 /* StringExtensions.swift */,
 				3833DF3228B808B7007333B0 /* GlobalVariables.swift */,
+				0BCAFE9E28C0D92D0064645D /* UIViewExtesions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -245,6 +253,9 @@
 			dependencies = (
 			);
 			name = MovieDB;
+			packageProductDependencies = (
+				0BCAFE9C28C0D5970064645D /* SDWebImage */,
+			);
 			productName = MovieDB;
 			productReference = 3833DEE828B7EC50007333B0 /* MovieDB.app */;
 			productType = "com.apple.product-type.application";
@@ -319,6 +330,9 @@
 				fa,
 			);
 			mainGroup = 3833DEDF28B7EC4F007333B0;
+			packageReferences = (
+				0BCAFE9B28C0D5970064645D /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 3833DEE928B7EC50007333B0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -369,11 +383,13 @@
 				3866268F28B8F6AB00806A2E /* MovieCollectionViewCell.swift in Sources */,
 				3833DF2B28B7F1A3007333B0 /* StringExtensions.swift in Sources */,
 				3833DF2F28B7F5ED007333B0 /* SearchViewModel.swift in Sources */,
+				0BCAFE9F28C0D92D0064645D /* UIViewExtesions.swift in Sources */,
 				3833DEF028B7EC50007333B0 /* SearchViewController.swift in Sources */,
 				3833DEEC28B7EC50007333B0 /* AppDelegate.swift in Sources */,
 				3833DF3328B808B7007333B0 /* GlobalVariables.swift in Sources */,
 				0BDC7FD828BB24A500C72E47 /* Repository.swift in Sources */,
 				3833DF3128B7FC9E007333B0 /* UIViewControllerExtensions.swift in Sources */,
+				0BCAFE9A28C0D24F0064645D /* UIImageViewExtensions.swift in Sources */,
 				3833DEEE28B7EC50007333B0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -728,6 +744,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0BCAFE9B28C0D5970064645D /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0BCAFE9C28C0D5970064645D /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0BCAFE9B28C0D5970064645D /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3833DEE028B7EC4F007333B0 /* Project object */;
 }
