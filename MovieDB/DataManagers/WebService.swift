@@ -16,15 +16,20 @@ class WebService {
     
     private init () {}
     
-    func searchMovie(url: URL, comple: @escaping (Result<SearchMovieResponse, RequestError>)->()) {
-        baseRequest(url: url, method: .get, responseType: SearchMovieResponse.self, comple: comple)
+}
+
+// MARK: - API Calls
+extension WebService {
+    
+    func searchMovie(url: URL, completion: @escaping (Result<SearchMovieResponse, RequestError>)->()) {
+        baseRequest(url: url, method: .get, responseType: SearchMovieResponse.self, completion: completion)
     }
 }
 
 // MARK: - Base API Call Function
 extension WebService {
     
-    private func baseRequest<T:Decodable>(url: URL, method: HTTPMethod, responseType: T.Type, comple: @escaping (Result<T, RequestError>)->()) {
+    private func baseRequest<T:Decodable>(url: URL, method: HTTPMethod, responseType: T.Type, completion: @escaping (Result<T, RequestError>)->()) {
         print("*** \(method.rawValue) url: \(url.absoluteString)")
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue.uppercased()
@@ -36,14 +41,14 @@ extension WebService {
                        print("*** response json:\n" + jsonString + "\n\n")
                     }
                     let parsedResponse = try JSONDecoder().decode(responseType.self, from: data)
-                    comple(.success(parsedResponse))
+                    completion(.success(parsedResponse))
                 } catch {
                     print("WebService getRequest error 1: " + error.localizedDescription)
-                    comple(.failure(.parsingIssue))
+                    completion(.failure(.parsingIssue))
                 }
             } else {
                 print("WebService getRequest error 2: " + error.debugDescription)
-                comple(.failure(.wrongResponse))
+                completion(.failure(.wrongResponse))
             }
         }).resume()
     }

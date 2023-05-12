@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B86FE872A0E91BF00E814DC /* LocalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B86FE862A0E91BF00E814DC /* LocalRepository.swift */; };
 		0BCAFE9A28C0D24F0064645D /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCAFE9928C0D24F0064645D /* UIImageViewExtensions.swift */; };
 		0BCAFE9D28C0D5970064645D /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 0BCAFE9C28C0D5970064645D /* SDWebImage */; };
 		0BCAFE9F28C0D92D0064645D /* UIViewExtesions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCAFE9E28C0D92D0064645D /* UIViewExtesions.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B86FE862A0E91BF00E814DC /* LocalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalRepository.swift; sourceTree = "<group>"; };
 		0BCAFE9928C0D24F0064645D /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
 		0BCAFE9E28C0D92D0064645D /* UIViewExtesions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtesions.swift; sourceTree = "<group>"; };
 		0BDC7FD528BB24A500C72E47 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				0BDC7FD628BB24A500C72E47 /* Repository.swift */,
+				0B86FE862A0E91BF00E814DC /* LocalRepository.swift */,
 				0BDC7FD528BB24A500C72E47 /* WebService.swift */,
 			);
 			path = DataManagers;
@@ -387,6 +390,7 @@
 				3833DEF028B7EC50007333B0 /* SearchViewController.swift in Sources */,
 				3833DEEC28B7EC50007333B0 /* AppDelegate.swift in Sources */,
 				3833DF3328B808B7007333B0 /* GlobalVariables.swift in Sources */,
+				0B86FE872A0E91BF00E814DC /* LocalRepository.swift in Sources */,
 				0BDC7FD828BB24A500C72E47 /* Repository.swift in Sources */,
 				3833DF3128B7FC9E007333B0 /* UIViewControllerExtensions.swift in Sources */,
 				0BCAFE9A28C0D24F0064645D /* UIImageViewExtensions.swift in Sources */,

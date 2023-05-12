@@ -14,50 +14,63 @@ class MovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var backgroundImageView: UIImageView!
     
-    private lazy var gradientLayer: CAGradientLayer = {
-        let l = CAGradientLayer()
-        l.frame = self.bounds
-        l.colors = [UIColor.clear.cgColor, UIColor.gray.cgColor]
-        l.startPoint = CGPoint(x: 0.5, y: 0.5)
-        l.endPoint = CGPoint(x: 0.5, y: 2)
-        l.cornerRadius = 16
-        layer.insertSublayer(l, at: 0)
-        return l
-    }()
+    static var identifier: String {
+        return String(describing: self)
+    }
+    
+    static var cellSize: CGSize {
+        if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight {
+            let width = UIScreen.main.bounds.width / 3.5
+            return CGSize(width: width, height: width / 2)
+        } else {
+            let width = screenWidth - 40
+            return CGSize(width: width, height: width / 2)
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         setupCell()
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        gradientLayer.frame = bounds
-    }
+}
 
+// MARK: Setup Functions
+extension MovieCollectionViewCell {
+    
     private func setupCell() {
         parentView.dropShadowAndCornerRadius(.large, shadowOpacity: 0.2)
         backgroundImageView.roundUp(.large)
-        parentView.layer.sublayers?.append(gradientLayer)
         titleLabel.textColor = .white
         parentView.bringSubviewToFront(titleLabel)
+        parentView.backgroundColor = .lightGray
     }
     
     func setup(with film: SearchMovieResponseResult) {
         titleLabel.text = film.title ?? "_"
         titleLabel.textAlignment = titleLabel.text!.containsArabic ? .right : .left
+        if let url = URL(string: Repository.shared.imagesBaseURL + (film.posterPath ?? "?")) {
+            loadImage(with: url)
+        } else {
+            showErrorImage()
+        }
+    }
+    
+    private func loadImage(with url: URL) {
         backgroundImageView.showActivityIndicator()
-        backgroundImageView.sd_setImage(with: URL(string: Repository.shared.imagesBaseURL + (film.posterPath ?? "?"))) { [weak self] image, error, type, url in
-            if error != nil {
-                self?.backgroundImageView.contentMode = .scaleAspectFit
-                self?.backgroundImageView.image = UIImage(named: "no-image")
-            } else {
+        backgroundImageView.sd_setImage(with: url) { [weak self] image, error, type, url in
+            if image != nil {
                 self?.backgroundImageView.contentMode = .scaleAspectFill
+            } else {
+                self?.showErrorImage()
             }
         }
-        // MARK: To load images without a library
+        // MARK: Uncomment to load images without a library
         // backgroundImageView.loadImage(from: Repository.shared.imagesBaseURL + (film.posterPath ?? "?"))
+    }
+    
+    private func showErrorImage() {
+        backgroundImageView.contentMode = .scaleAspectFit
+        backgroundImageView.image = UIImage(named: "no-image")
     }
 }

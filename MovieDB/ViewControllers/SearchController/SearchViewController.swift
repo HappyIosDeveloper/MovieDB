@@ -13,18 +13,19 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var viewModel = SearchViewModel()
+    var viewModel: SearchViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupViews()
+        setupViewModel()
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-         super.willTransition(to: newCollection, with: coordinator)
-        viewModel.reloadCollectionView?()
-     }
+        super.willTransition(to: newCollection, with: coordinator)
+        viewModel.reloadCollectionView()
+    }
 }
 
 // MARK: - Setup Functions
@@ -34,7 +35,13 @@ extension SearchViewController {
         setupNavigationBar()
         setupSearchBar()
         setupCollectionView()
-        bindViewModel()
+    }
+    
+    private func setupViewModel() {
+        viewModel = SearchViewModel() {
+            self.reloadCollectionView()
+        }
+        viewModel.films = []
     }
     
     private func setupNavigationBar() {
@@ -44,11 +51,13 @@ extension SearchViewController {
     private func setupSearchBar() {
         searchBar.delegate = self
         searchBar.placeholder = "search_here".localized
+        searchBar.becomeFirstResponder()
     }
     
     private func setupCollectionView() {
         let space: CGFloat = 16
-        collectionView.register(UINib(nibName: "MovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MovieCollectionViewCell")
+        let cellID = MovieCollectionViewCell.identifier
+        collectionView.register(UINib(nibName: cellID, bundle: nil), forCellWithReuseIdentifier: cellID)
         collectionView.delegate = self
         collectionView.dataSource = self
         let layout = UICollectionViewFlowLayout()
@@ -60,7 +69,7 @@ extension SearchViewController {
         collectionView.keyboardDismissMode = .onDrag
     }
     
-    func setupCollectionViewBackground(shouldShowBackground: Bool) {
+    private func setupCollectionViewBackground(shouldShowBackground: Bool) {
         let dimension = screenWidth / 4
         let backView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: dimension, height: dimension)))
         backView.image = UIImage(named: "nodata-found")
@@ -71,14 +80,6 @@ extension SearchViewController {
     private func reloadCollectionView() {
         collectionView.reloadData()
         setupCollectionViewBackground(shouldShowBackground: viewModel.films.isEmpty)
-    }
-    
-    private func bindViewModel() {
-        viewModel.bind {
-            DispatchQueue.main.async {
-                self.reloadCollectionView()
-            }
-        }
     }
 }
 
@@ -116,14 +117,16 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: CollectionViewDelegates {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.getCellsCount()
+        return viewModel.films.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return viewModel.getCell(collectionView: collectionView, indexPath: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionViewCell.identifier, for: indexPath) as! MovieCollectionViewCell
+        cell.setup(with: viewModel.films[indexPath.row])
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return viewModel.getCellSize()
+        return MovieCollectionViewCell.cellSize
     }
 }
